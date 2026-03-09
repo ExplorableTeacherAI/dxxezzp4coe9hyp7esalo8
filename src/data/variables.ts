@@ -1,16 +1,11 @@
 /**
  * Variables Configuration
  * =======================
- * 
+ *
  * CENTRAL PLACE TO DEFINE ALL SHARED VARIABLES
- * 
+ *
  * This file defines all variables that can be shared across sections.
  * AI agents should read this file to understand what variables are available.
- * 
- * USAGE:
- * 1. Define variables here with their default values and metadata
- * 2. Use them in any section with: const x = useVar('variableName', defaultValue)
- * 3. Update them with: setVar('variableName', newValue)
  */
 
 import { type VarValue } from '@/stores';
@@ -53,108 +48,147 @@ export interface VariableDefinition {
 
 /**
  * =====================================================
- * 🎯 DEFINE YOUR VARIABLES HERE
+ * 🎯 GRIDS AND GRAPHS LESSON VARIABLES
  * =====================================================
- * 
- * SUPPORTED TYPES:
- * 
- * 1. NUMBER (slider):
- *    { defaultValue: 5, type: 'number', min: 0, max: 10, step: 1 }
- * 
- * 2. TEXT (free text):
- *    { defaultValue: 'Hello', type: 'text', placeholder: 'Enter text...' }
- * 
- * 3. SELECT (dropdown):
- *    { defaultValue: 'sine', type: 'select', options: ['sine', 'cosine', 'tangent'] }
- * 
- * 4. BOOLEAN (toggle):
- *    { defaultValue: true, type: 'boolean' }
- * 
- * 5. ARRAY (list of numbers):
- *    { defaultValue: [1, 2, 3], type: 'array' }
- * 
- * 6. OBJECT (complex data):
- *    { defaultValue: { x: 5, y: 10 }, type: 'object', schema: '{ x: number, y: number }' }
  */
 export const variableDefinitions: Record<string, VariableDefinition> = {
-    // ========================================
-    // ADD YOUR VARIABLES HERE
-    // ========================================
-
-    // Uncomment and modify these examples for your lesson:
-
-    /*
     // ─────────────────────────────────────────
-    // NUMBER - Use with sliders
+    // SECTION 2: What is a Graph?
     // ─────────────────────────────────────────
-    myValue: {
-        defaultValue: 5,
+    graphHighlight: {
+        defaultValue: null,
+        type: 'linkedHighlight',
+        label: 'Graph Highlight',
+        description: 'Highlight ID for graph elements',
+        color: '#6366F1',
+    },
+
+    // ─────────────────────────────────────────
+    // SECTION 3: Grids as Graphs
+    // ─────────────────────────────────────────
+    gridSize: {
+        defaultValue: 4,
         type: 'number',
-        label: 'My Value',
-        description: 'A number that controls something',
-        unit: 'm',           // optional unit display
-        min: 0,
-        max: 10,
-        step: 0.5,
+        label: 'Grid Size',
+        description: 'Width/height of the grid',
+        min: 2,
+        max: 8,
+        step: 1,
+        color: '#3cc499',
     },
-
-    // ─────────────────────────────────────────
-    // TEXT - Free text input
-    // ─────────────────────────────────────────
-    lessonTitle: {
-        defaultValue: 'My Lesson',
-        type: 'text',
-        label: 'Lesson Title',
-        description: 'The title of your lesson',
-        placeholder: 'Enter a title...',
+    selectedCell: {
+        defaultValue: { x: 1, y: 1 },
+        type: 'object',
+        label: 'Selected Cell',
+        description: 'Currently selected grid cell',
+        schema: '{ x: number, y: number }',
     },
-
-    // ─────────────────────────────────────────
-    // SELECT - Dropdown with options
-    // ─────────────────────────────────────────
-    difficulty: {
-        defaultValue: 'medium',
-        type: 'select',
-        label: 'Difficulty',
-        description: 'The difficulty level of the lesson',
-        options: ['easy', 'medium', 'hard', 'expert'],
-    },
-
-    // ─────────────────────────────────────────
-    // BOOLEAN - Toggle switch
-    // ─────────────────────────────────────────
-    showHints: {
+    showNeighbors: {
         defaultValue: true,
         type: 'boolean',
-        label: 'Show Hints',
-        description: 'Toggle to show or hide hints',
+        label: 'Show Neighbors',
+        description: 'Toggle neighbor highlighting',
+    },
+    movementType: {
+        defaultValue: '4-way',
+        type: 'select',
+        label: 'Movement Type',
+        description: 'Type of grid movement',
+        options: ['4-way', '8-way'],
+        color: '#8b5cf6',
     },
 
     // ─────────────────────────────────────────
-    // ARRAY - List of numbers
+    // SECTION 4: Graph Variants
     // ─────────────────────────────────────────
-    dataPoints: {
-        defaultValue: [1, 4, 9, 16, 25],
-        type: 'array',
-        label: 'Data Points',
-        description: 'Y-values for plotting a graph',
+    graphType: {
+        defaultValue: 'undirected',
+        type: 'select',
+        label: 'Graph Type',
+        description: 'Type of graph edges',
+        options: ['undirected', 'directed'],
+        color: '#f59e0b',
+    },
+    showWeights: {
+        defaultValue: false,
+        type: 'boolean',
+        label: 'Show Weights',
+        description: 'Toggle edge weight display',
+    },
+    edgeWeight: {
+        defaultValue: 1,
+        type: 'number',
+        label: 'Edge Weight',
+        description: 'Weight/cost of an edge',
+        min: 1,
+        max: 10,
+        step: 1,
+        color: '#ef4444',
     },
 
     // ─────────────────────────────────────────
-    // OBJECT - Complex structured data
+    // SECTION 5: Representing Obstacles
     // ─────────────────────────────────────────
-    graphSettings: {
-        defaultValue: { 
-            xMin: -10, 
-            xMax: 10, 
-            showGrid: true 
-        },
-        type: 'object',
-        label: 'Graph Settings',
-        description: 'Configuration for the graph display',
-        schema: '{ xMin: number, xMax: number, showGrid: boolean }',
+    obstacleStrategy: {
+        defaultValue: 'remove-nodes',
+        type: 'select',
+        label: 'Obstacle Strategy',
+        description: 'How obstacles are represented',
+        options: ['remove-nodes', 'remove-edges', 'infinite-weight'],
+        color: '#ec4899',
     },
-    */
+
+    // ─────────────────────────────────────────
+    // ASSESSMENT QUESTIONS
+    // ─────────────────────────────────────────
+    answer_graph_components: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Graph Components Answer',
+        correctAnswer: '2',
+        placeholder: '?',
+        color: '#3B82F6',
+    },
+    answer_edges_count: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Edges Count Answer',
+        correctAnswer: '4',
+        placeholder: '?',
+        color: '#3B82F6',
+    },
+    answer_grid_neighbors: {
+        defaultValue: '',
+        type: 'text',
+        label: 'Grid Neighbors Answer',
+        correctAnswer: '4',
+        placeholder: '?',
+        color: '#3B82F6',
+    },
+    answer_8way_neighbors: {
+        defaultValue: '',
+        type: 'text',
+        label: '8-way Neighbors Answer',
+        correctAnswer: '8',
+        placeholder: '?',
+        color: '#3B82F6',
+    },
+    answer_directed_meaning: {
+        defaultValue: '',
+        type: 'select',
+        label: 'Directed Graph Meaning',
+        correctAnswer: 'one-way',
+        options: ['one-way', 'two-way', 'no-way'],
+        color: '#8b5cf6',
+    },
+    answer_obstacle_strategy: {
+        defaultValue: '',
+        type: 'select',
+        label: 'Obstacle Strategy Answer',
+        correctAnswer: 'remove-nodes',
+        options: ['remove-nodes', 'remove-edges', 'infinite-weight'],
+        color: '#ec4899',
+    },
 };
 
 /**
@@ -191,7 +225,6 @@ export const getDefaultValues = (): Record<string, VarValue> => {
 
 /**
  * Get number props for InlineScrubbleNumber from a variable definition.
- * Use with getVariableInfo(name) in blocks.tsx, or getExampleVariableInfo(name) in exampleBlocks.tsx.
  */
 export function numberPropsFromDefinition(def: VariableDefinition | undefined): {
     defaultValue?: number;
@@ -211,12 +244,7 @@ export function numberPropsFromDefinition(def: VariableDefinition | undefined): 
 }
 
 /**
- * Get cloze input props for InlineClozeInput from a variable definition.
- * Use with getVariableInfo(name) in blocks.tsx, or getExampleVariableInfo(name) in exampleBlocks.tsx.
- */
-/**
  * Get cloze choice props for InlineClozeChoice from a variable definition.
- * Use with getVariableInfo(name) in blocks.tsx.
  */
 export function choicePropsFromDefinition(def: VariableDefinition | undefined): {
     placeholder?: string;
@@ -233,7 +261,6 @@ export function choicePropsFromDefinition(def: VariableDefinition | undefined): 
 
 /**
  * Get toggle props for InlineToggle from a variable definition.
- * Use with getVariableInfo(name) in blocks.tsx.
  */
 export function togglePropsFromDefinition(def: VariableDefinition | undefined): {
     color?: string;
@@ -263,15 +290,6 @@ export function clozePropsFromDefinition(def: VariableDefinition | undefined): {
 
 /**
  * Get spot-color props for InlineSpotColor from a variable definition.
- * Extracts the `color` field.
- *
- * @example
- * <InlineSpotColor
- *     varName="radius"
- *     {...spotColorPropsFromDefinition(getVariableInfo('radius'))}
- * >
- *     radius
- * </InlineSpotColor>
  */
 export function spotColorPropsFromDefinition(def: VariableDefinition | undefined): {
     color: string;
@@ -283,16 +301,6 @@ export function spotColorPropsFromDefinition(def: VariableDefinition | undefined
 
 /**
  * Get linked-highlight props for InlineLinkedHighlight from a variable definition.
- * Extracts the `color` and `bgColor` fields.
- *
- * @example
- * <InlineLinkedHighlight
- *     varName="activeHighlight"
- *     highlightId="radius"
- *     {...linkedHighlightPropsFromDefinition(getVariableInfo('activeHighlight'))}
- * >
- *     radius
- * </InlineLinkedHighlight>
  */
 export function linkedHighlightPropsFromDefinition(def: VariableDefinition | undefined): {
     color?: string;
@@ -306,17 +314,6 @@ export function linkedHighlightPropsFromDefinition(def: VariableDefinition | und
 
 /**
  * Build the `variables` prop for FormulaBlock from variable definitions.
- *
- * Takes an array of variable names and returns the config map expected by
- * `<FormulaBlock variables={...} />`.
- *
- * @example
- * import { scrubVarsFromDefinitions } from './variables';
- *
- * <FormulaBlock
- *     latex="\scrub{mass} \times \scrub{accel}"
- *     variables={scrubVarsFromDefinitions(['mass', 'accel'])}
- * />
  */
 export function scrubVarsFromDefinitions(
     varNames: string[],
