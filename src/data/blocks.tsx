@@ -488,15 +488,7 @@ const graphBasicsBlocks: ReactElement[] = [
                 >
                     G
                 </InlineLinkedHighlight>
-                . Each{" "}
-                <InlineTooltip
-                    id="tooltip-arrows-example"
-                    tooltip="The lines with arrowheads connecting nodes. Each arrow represents a connection."
-                    color="#ec4899"
-                >
-                    arrow
-                </InlineTooltip>{" "}
-                represents an edge. Notice that{" "}
+                . Each arrow represents an edge. Notice that{" "}
                 <InlineLinkedHighlight
                     varName="graphHighlight"
                     highlightId="nodeA"
@@ -504,10 +496,10 @@ const graphBasicsBlocks: ReactElement[] = [
                 >
                     node A
                 </InlineLinkedHighlight>{" "}
-                connects to{" "}
+                has edges going to{" "}
                 <InlineLinkedHighlight
                     varName="graphHighlight"
-                    highlightId="nodeB"
+                    highlightId="edgeAB"
                     color="#EC4899"
                 >
                     B
@@ -515,7 +507,7 @@ const graphBasicsBlocks: ReactElement[] = [
                 ,{" "}
                 <InlineLinkedHighlight
                     varName="graphHighlight"
-                    highlightId="nodeD"
+                    highlightId="edgeAD"
                     color="#F59E0B"
                 >
                     D
@@ -523,7 +515,7 @@ const graphBasicsBlocks: ReactElement[] = [
                 , and{" "}
                 <InlineLinkedHighlight
                     varName="graphHighlight"
-                    highlightId="nodeG"
+                    highlightId="edgeAG"
                     color="#8B5CF6"
                 >
                     G
@@ -536,18 +528,18 @@ const graphBasicsBlocks: ReactElement[] = [
                 >
                     Node B
                 </InlineLinkedHighlight>{" "}
-                connects back to{" "}
+                has an edge{" "}
                 <InlineLinkedHighlight
                     varName="graphHighlight"
-                    highlightId="nodeA"
+                    highlightId="edgeBA"
                     color="#6366F1"
                 >
-                    A
+                    back to A
                 </InlineLinkedHighlight>
                 , and also to{" "}
                 <InlineLinkedHighlight
                     varName="graphHighlight"
-                    highlightId="nodeC"
+                    highlightId="edgeBC"
                     color="#14B8A6"
                 >
                     C
@@ -555,12 +547,12 @@ const graphBasicsBlocks: ReactElement[] = [
                 and{" "}
                 <InlineLinkedHighlight
                     varName="graphHighlight"
-                    highlightId="nodeF"
+                    highlightId="edgeBF"
                     color="#3B82F6"
                 >
                     F
                 </InlineLinkedHighlight>
-                . Hover over any node name here or in the diagram to see it
+                . Hover over any node or edge reference here, or in the diagram, to see it
                 highlighted.
             </EditableParagraph>
         </Block>
