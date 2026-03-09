@@ -11,6 +11,7 @@ import {
     InlineToggle,
     InlineClozeInput,
     InlineFeedback,
+    InlineLinkedHighlight,
 } from "@/components/atoms";
 import { useVar } from "@/stores";
 
@@ -106,35 +107,36 @@ const GridGraphVisualization = () => {
 /**
  * Simple Graph Example for Section 2
  * Shows the classic A-G graph from the article
+ * Nodes have highlightId for linked highlighting with text
  */
 const SimpleGraphExample = () => {
     const nodes = [
-        { id: "A", label: "A", group: "a" },
-        { id: "B", label: "B", group: "b" },
-        { id: "C", label: "C", group: "c" },
-        { id: "D", label: "D", group: "d" },
-        { id: "E", label: "E", group: "e" },
-        { id: "F", label: "F", group: "f" },
-        { id: "G", label: "G", group: "g" },
+        { id: "A", label: "A", group: "a", highlightId: "nodeA" },
+        { id: "B", label: "B", group: "b", highlightId: "nodeB" },
+        { id: "C", label: "C", group: "c", highlightId: "nodeC" },
+        { id: "D", label: "D", group: "d", highlightId: "nodeD" },
+        { id: "E", label: "E", group: "e", highlightId: "nodeE" },
+        { id: "F", label: "F", group: "f", highlightId: "nodeF" },
+        { id: "G", label: "G", group: "g", highlightId: "nodeG" },
     ];
 
     const links = [
-        { source: "A", target: "B", directed: true },
-        { source: "A", target: "D", directed: true },
-        { source: "A", target: "G", directed: true },
-        { source: "B", target: "A", directed: true },
-        { source: "B", target: "C", directed: true },
-        { source: "B", target: "F", directed: true },
-        { source: "C", target: "B", directed: true },
-        { source: "C", target: "D", directed: true },
-        { source: "C", target: "E", directed: true },
-        { source: "D", target: "C", directed: true },
-        { source: "D", target: "A", directed: true },
-        { source: "E", target: "C", directed: true },
-        { source: "E", target: "F", directed: true },
-        { source: "F", target: "B", directed: true },
-        { source: "F", target: "E", directed: true },
-        { source: "G", target: "A", directed: true },
+        { source: "A", target: "B", directed: true, highlightId: "edgeAB" },
+        { source: "A", target: "D", directed: true, highlightId: "edgeAD" },
+        { source: "A", target: "G", directed: true, highlightId: "edgeAG" },
+        { source: "B", target: "A", directed: true, highlightId: "edgeBA" },
+        { source: "B", target: "C", directed: true, highlightId: "edgeBC" },
+        { source: "B", target: "F", directed: true, highlightId: "edgeBF" },
+        { source: "C", target: "B", directed: true, highlightId: "edgeCB" },
+        { source: "C", target: "D", directed: true, highlightId: "edgeCD" },
+        { source: "C", target: "E", directed: true, highlightId: "edgeCE" },
+        { source: "D", target: "C", directed: true, highlightId: "edgeDC" },
+        { source: "D", target: "A", directed: true, highlightId: "edgeDA" },
+        { source: "E", target: "C", directed: true, highlightId: "edgeEC" },
+        { source: "E", target: "F", directed: true, highlightId: "edgeEF" },
+        { source: "F", target: "B", directed: true, highlightId: "edgeFB" },
+        { source: "F", target: "E", directed: true, highlightId: "edgeFE" },
+        { source: "G", target: "A", directed: true, highlightId: "edgeGA" },
     ];
 
     return (
@@ -462,10 +464,104 @@ const graphBasicsBlocks: ReactElement[] = [
                 id="para-graph-explanation"
                 blockId="block-graph-explanation"
             >
-                The diagram shows a graph with seven nodes labeled A through G.
-                Each arrow represents an edge. Notice that node A connects to B,
-                D, and G. Node B connects back to A, and also to C and F. You
-                can hover over any node to see its connections highlighted.
+                The diagram shows a graph with seven{" "}
+                <InlineTooltip
+                    id="tooltip-nodes-example"
+                    tooltip="The circles in the diagram. Each node represents a location."
+                    color="#6366F1"
+                >
+                    nodes
+                </InlineTooltip>{" "}
+                labeled{" "}
+                <InlineLinkedHighlight
+                    varName="graphHighlight"
+                    highlightId="nodeA"
+                    color="#6366F1"
+                >
+                    A
+                </InlineLinkedHighlight>{" "}
+                through{" "}
+                <InlineLinkedHighlight
+                    varName="graphHighlight"
+                    highlightId="nodeG"
+                    color="#8B5CF6"
+                >
+                    G
+                </InlineLinkedHighlight>
+                . Each{" "}
+                <InlineTooltip
+                    id="tooltip-arrows-example"
+                    tooltip="The lines with arrowheads connecting nodes. Each arrow represents a connection."
+                    color="#ec4899"
+                >
+                    arrow
+                </InlineTooltip>{" "}
+                represents an edge. Notice that{" "}
+                <InlineLinkedHighlight
+                    varName="graphHighlight"
+                    highlightId="nodeA"
+                    color="#6366F1"
+                >
+                    node A
+                </InlineLinkedHighlight>{" "}
+                connects to{" "}
+                <InlineLinkedHighlight
+                    varName="graphHighlight"
+                    highlightId="nodeB"
+                    color="#EC4899"
+                >
+                    B
+                </InlineLinkedHighlight>
+                ,{" "}
+                <InlineLinkedHighlight
+                    varName="graphHighlight"
+                    highlightId="nodeD"
+                    color="#F59E0B"
+                >
+                    D
+                </InlineLinkedHighlight>
+                , and{" "}
+                <InlineLinkedHighlight
+                    varName="graphHighlight"
+                    highlightId="nodeG"
+                    color="#8B5CF6"
+                >
+                    G
+                </InlineLinkedHighlight>
+                .{" "}
+                <InlineLinkedHighlight
+                    varName="graphHighlight"
+                    highlightId="nodeB"
+                    color="#EC4899"
+                >
+                    Node B
+                </InlineLinkedHighlight>{" "}
+                connects back to{" "}
+                <InlineLinkedHighlight
+                    varName="graphHighlight"
+                    highlightId="nodeA"
+                    color="#6366F1"
+                >
+                    A
+                </InlineLinkedHighlight>
+                , and also to{" "}
+                <InlineLinkedHighlight
+                    varName="graphHighlight"
+                    highlightId="nodeC"
+                    color="#14B8A6"
+                >
+                    C
+                </InlineLinkedHighlight>{" "}
+                and{" "}
+                <InlineLinkedHighlight
+                    varName="graphHighlight"
+                    highlightId="nodeF"
+                    color="#3B82F6"
+                >
+                    F
+                </InlineLinkedHighlight>
+                . Hover over any node name here or in the diagram to see it
+                highlighted.
             </EditableParagraph>
         </Block>
         <Block id="block-graph-viz" padding="sm" hasVisualization>
